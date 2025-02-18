@@ -19,16 +19,26 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 app.use(express.json());
 app.use(cookieParser());
+const allowedOrigins = [
+  "http://localhost:5173", // Development
+  "https://thinkchat.vercel.app", // Production
+];
 app.use(
   cors({
-    origin: "https://thinkchat.vercel.app/",
-    credentials: true,
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true, // Allows cookies & tokens
   })
 );
 
 app.use(
   cors({
-    origin: "https://thinkchat.vercel.app/", // Frontend URL
+    origin: "http://localhost:5173", // Frontend URL
     methods: ["GET", "POST", "DELETE", "PUT"],
     allowedHeaders: ["Content-Type", "Authorization"], // Allow Authorization header
   })

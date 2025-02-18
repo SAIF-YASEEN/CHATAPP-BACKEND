@@ -7,7 +7,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: ["https://test-repo-production-5712.up.railway.app/"],
+    origin: ["http://localhost:5173"],
   },
 });
 
