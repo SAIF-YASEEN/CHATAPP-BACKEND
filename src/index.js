@@ -20,8 +20,8 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 const allowedOrigins = [
+  "https://test-repo-production-5712.up.railway.app/",
   "http://localhost:5173", // Development
-  "https://thinkchat.vercel.app", // Production
 ];
 app.use(
   cors({
