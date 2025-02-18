@@ -21,14 +21,14 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://thinkchat.vercel.app/",
     credentials: true,
   })
 );
 
 app.use(
   cors({
-    origin: "http://localhost:5173", // Frontend URL
+    origin: "https://thinkchat.vercel.app/", // Frontend URL
     methods: ["GET", "POST", "DELETE", "PUT"],
     allowedHeaders: ["Content-Type", "Authorization"], // Allow Authorization header
   })
