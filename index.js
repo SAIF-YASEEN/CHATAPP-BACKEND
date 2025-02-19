@@ -21,14 +21,14 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "https://chatapp-delta-rouge.vercel.app",
+    origin: "https://thinkchat.vercel.app",
     credentials: true,
   })
 );
 
 app.use(
   cors({
-    origin: "https://chatapp-delta-rouge.vercel.app", // Frontend URL
+    origin: "https://thinkchat.vercel.app", // Frontend URL
     methods: ["GET", "POST", "DELETE", "PUT"],
     allowedHeaders: ["Content-Type", "Authorization"], // Allow Authorization header
   })
