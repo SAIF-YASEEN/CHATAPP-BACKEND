@@ -16,19 +16,23 @@ const PORT = process.env.PORT;
 const __dirname = path.resolve();
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
-app.use(
-  cors({
-    origin: [
-      "https://test-repo-production-5712.up.railway.app",
-      "http://localhost:5173",
-    ],
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+
 app.use(express.json());
 app.use(cookieParser());
+app.use(
+  cors({
+    origin: "https://chatapp-4fad-git-main-saifs-projects-78b28f8a.vercel.app",
+    credentials: true,
+  })
+);
+
+app.use(
+  cors({
+    origin: "https://chatapp-4fad-git-main-saifs-projects-78b28f8a.vercel.app", // Frontend URL
+    methods: ["GET", "POST", "DELETE", "PUT"],
+    allowedHeaders: ["Content-Type", "Authorization"], // Allow Authorization header
+  })
+);
 
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
@@ -40,7 +44,9 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
   });
 }
-
+app.get("/test", (req, res) => {
+  res.send("test page working showing that");
+});
 server.listen(PORT, () => {
   console.log("server is running on PORT:" + PORT);
   connectDB();

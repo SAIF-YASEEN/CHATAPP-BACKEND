@@ -35,17 +35,18 @@ export const protectRoute = async (req, res, next) => {
 // Middleware to verify token
 
 export const verifyToken = (req, res, next) => {
-  const token = req.header("Authorization")?.split(" ")[1];
+  const token =
+    req.cookies?.token || req.headers["authorization"]?.split(" ")[1];
+
   if (!token) {
-    return res.status(403).json({ message: "No token, authorization denied" });
+    return res.status(401).json({ message: "Unauthorized: No token provided" });
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET); // Use your secret key here
-    req.user = decoded; // Attach decoded user info to the request object
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded;
     next();
-  } catch (err) {
-    return res.status(401).json({ message: "Token is not valid" });
+  } catch (error) {
+    return res.status(401).json({ message: "Unauthorized: Invalid token" });
   }
 };
-
