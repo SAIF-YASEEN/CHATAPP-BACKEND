@@ -21,14 +21,14 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "https://chatapp-4fad-git-main-saifs-projects-78b28f8a.vercel.app",
+    origin: "http://localhost:5173",
     credentials: true,
   })
 );
 
 app.use(
   cors({
-    origin: "https://chatapp-4fad-git-main-saifs-projects-78b28f8a.vercel.app", // Frontend URL
+    origin: "http://localhost:5173", // Frontend URL
     methods: ["GET", "POST", "DELETE", "PUT"],
     allowedHeaders: ["Content-Type", "Authorization"], // Allow Authorization header
   })
