@@ -47,6 +47,9 @@ if (process.env.NODE_ENV === "production") {
 app.get("/test", (req, res) => {
   res.send("test page working showing that");
 });
+app.get("/", (req, res) => {
+  res.send("main page working showing that");
+});
 server.listen(PORT, () => {
   console.log("server is running on PORT:" + PORT);
   connectDB();
